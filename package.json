@@ -10,7 +10,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "express": "^4.18.1"
+	  "dependencies": {
+    "lighthouse": "^9.6.5"
   }
 }
