@@ -1,14 +1,19 @@
-var express = require('express');
-var app = express();
-var fs = require('fs');
-var port = 8080;
+const fs = require('fs');
+const lighthouse = require('lighthouse');
+const chromeLauncher = require('chrome-launcher');
 
-// New code
-app.get('/test', function (req, res) {
-    res.send('the REST endpoint test run!');
-});
+(async () => {
+  const chrome = await chromeLauncher.launch({chromeFlags: ['--headless']});
+  const options = {logLevel: 'info', output: 'html', onlyCategories: ['performance'], port: chrome.port};
+  const runnerResult = await lighthouse('https://www.ankara.edu.tr', options);
 
+  // `.report` is the HTML report as a string
+  const reportHtml = runnerResult.report;
+  fs.writeFileSync('lhreport.html', reportHtml);
 
-app.listen(port, function() {
-  console.log('Server running at http://127.0.0.1:%s', port);
-});
+  // `.lhr` is the Lighthouse Result as a JS object
+  console.log('Report is done for', runnerResult.lhr.finalUrl);
+  console.log('Performance score was', runnerResult.lhr.categories.performance.score * 100);
+
+  await chrome.kill();
+})();
