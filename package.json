@@ -9,13 +9,11 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "lighthouse": "^5.1.0"
-  },
   "dependencies": {
 	    "chrome-launcher": "^0.15.1",
     "fs": "0.0.1-security",
     "puppeteer": "^1.13.0",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "lighthouse": "^5.1.0"
   }
 }
