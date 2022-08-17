@@ -10,6 +10,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+<<<<<<< HEAD
   "devDependencies": {
     "lighthouse": "^5.1.0"
   },
@@ -17,5 +18,9 @@
     "fs": "0.0.1-security",
     "puppeteer": "^1.13.0",
     "request": "^2.88.0"
+=======
+	  "dependencies": {
+    "lighthouse": "^9.6.5"
+>>>>>>> refs/remotes/origin/main
   }
 }

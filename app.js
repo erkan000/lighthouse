@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const chromeLauncher = require('chrome-launcher');
 const puppeteer = require('puppeteer');
 const lighthouse = require('lighthouse');
@@ -6,8 +7,14 @@ const reportGenerator = require('lighthouse/lighthouse-core/report/report-genera
 const request = require('request');
 const util = require('util');
 const fs = require('fs');
+=======
+const fs = require('fs');
+const lighthouse = require('lighthouse');
+const chromeLauncher = require('chrome-launcher');
+>>>>>>> refs/remotes/origin/main
 
 (async () => {
+<<<<<<< HEAD
 
     const loginURL = 'https://www.ankara.edu.tr';
 
@@ -31,8 +38,17 @@ const fs = require('fs');
     const resp = await util.promisify(request)(`http://localhost:${opts.port}/json/version`);
     const { webSocketDebuggerUrl } = JSON.parse(resp.body);
     const browser = await puppeteer.connect({ browserWSEndpoint: webSocketDebuggerUrl });
+=======
+  const chrome = await chromeLauncher.launch({chromeFlags: ['--headless']});
+  const options = {logLevel: 'info', output: 'html', onlyCategories: ['performance'], port: chrome.port};
+  const runnerResult = await lighthouse('https://www.ankara.edu.tr', options);
+>>>>>>> refs/remotes/origin/main
 
+  // `.report` is the HTML report as a string
+  const reportHtml = runnerResult.report;
+  fs.writeFileSync('lhreport.html', reportHtml);
 
+<<<<<<< HEAD
     //Puppeteer
     page = (await browser.pages())[0];
     await page.setViewport({ width: 1200, height: 900 });
@@ -68,3 +84,11 @@ const fs = require('fs');
     });
 
 })();
+=======
+  // `.lhr` is the Lighthouse Result as a JS object
+  console.log('Report is done for', runnerResult.lhr.finalUrl);
+  console.log('Performance score was', runnerResult.lhr.categories.performance.score * 100);
+
+  await chrome.kill();
+})();
+>>>>>>> refs/remotes/origin/main
