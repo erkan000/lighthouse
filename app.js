@@ -32,9 +32,6 @@ const fs = require('fs');
     const { webSocketDebuggerUrl } = JSON.parse(resp.body);
     const browser = await puppeteer.connect({ browserWSEndpoint: webSocketDebuggerUrl });
 
-  // `.report` is the HTML report as a string
-  const reportHtml = runnerResult.report;
-  fs.writeFileSync('lhreport.html', reportHtml);
 
     //Puppeteer
     page = (await browser.pages())[0];
